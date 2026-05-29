@@ -27,14 +27,11 @@
     cursor: none;
   }
 
-  .cursor {
-    width: 5px; height: 5px; background: var(--white); border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+  .cursor, .cursor-ring {
+    position: fixed; pointer-events: none; transform: translate(-50%, -50%);
   }
-  .cursor-ring {
-    width: 30px; height: 30px; border: 1px solid rgba(232,228,220,0.2); border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%);
-  }
+  .cursor { width: 5px; height: 5px; background: var(--white); border-radius: 50%; z-index: 9999; }
+  .cursor-ring { width: 30px; height: 30px; border: 1px solid rgba(232,228,220,0.2); border-radius: 50%; z-index: 9998; }
 
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -62,17 +59,17 @@
     margin-bottom: 1.5rem; font-weight: 200; opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
   }
   .hero-title {
-    font-family: 'Cormorant Garamond', serif; font-size: clamp(68px, 10.5vw, 144px);
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 10.5vw, 144px);
     font-weight: 300; line-height: 0.92; letter-spacing: -1px;
     opacity: 0; animation: fadeUp 1s ease 0.5s forwards;
   }
   .hero-title em { font-style: italic; color: var(--accent); }
   .hero-sub {
-    margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: flex-end;
+    margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem;
     opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
   }
   .hero-desc { font-size: 11px; color: rgba(232,228,220,0.3); letter-spacing: 1px; line-height: 2; max-width: 280px; font-weight: 200; }
-  .hero-scroll { font-size: 9px; letter-spacing: 4px; color: rgba(232,228,220,0.15); text-transform: uppercase; display: flex; align-items: center; gap: 12px; font-weight: 200; }
+  .hero-scroll { font-size: 9px; letter-spacing: 4px; color: rgba(232,228,220,0.15); text-transform: uppercase; display: flex; align-items: center; gap: 12px; font-weight: 200; white-space: nowrap; }
   .hero-scroll::before { content: ''; width: 40px; height: 1px; background: rgba(232,228,220,0.1); }
 
   .awards-bar {
@@ -82,7 +79,7 @@
   .award-item { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; opacity: 0; animation: fadeIn 0.8s ease forwards; }
   .award-item:nth-child(1) { animation-delay: 1s; }
   .award-item:nth-child(2) { animation-delay: 1.2s; }
-  .award-medal { font-size: 8px; letter-spacing: 2px; padding: 3px 9px; border: 1px solid var(--accent); color: var(--accent); text-transform: uppercase; font-weight: 300; }
+  .award-medal { font-size: 8px; letter-spacing: 2px; padding: 3px 9px; border: 1px solid var(--accent); color: var(--accent); text-transform: uppercase; font-weight: 300; white-space: nowrap; }
   .award-medal.silver { border-color: rgba(232,228,220,0.2); color: rgba(232,228,220,0.35); }
   .award-name { font-size: 10px; color: rgba(232,228,220,0.22); letter-spacing: 1px; font-weight: 200; }
   .award-divider { width: 1px; height: 20px; background: var(--border); }
@@ -94,10 +91,7 @@
   .work-item { position: relative; aspect-ratio: 16/9; background: #0f0f0f; overflow: hidden; cursor: none; }
   .work-item:first-child { grid-column: span 2; aspect-ratio: 21/9; }
   .work-item iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; pointer-events: none; }
-
-  .work-click {
-    position: absolute; inset: 0; z-index: 3; cursor: none;
-  }
+  .work-click { position: absolute; inset: 0; z-index: 3; cursor: none; }
 
   .work-info {
     position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem;
@@ -116,32 +110,28 @@
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
     background: rgba(8,8,8,0.5); opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
   }
-  .work-item:hover .sound-icon { opacity: 1; }
+  .work-item:hover .sound-icon, .work-item.sound-on .sound-icon { opacity: 1; }
+  .work-item.sound-on .sound-icon { border-color: var(--white); background: rgba(8,8,8,0.8); }
   .sound-icon svg { width: 14px; height: 14px; fill: var(--white); }
 
   .about { padding: 7rem 3rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
   .about-text { font-size: 13px; color: var(--white); line-height: 2.2; letter-spacing: 0.3px; font-weight: 200; }
 
-  .brands-scroll {
-    max-height: 360px; overflow-y: auto; padding-right: 1rem;
-  }
+  .brands-scroll { max-height: 360px; overflow-y: auto; padding-right: 1rem; }
   .brands-scroll::-webkit-scrollbar { width: 3px; }
   .brands-scroll::-webkit-scrollbar-track { background: var(--border); }
   .brands-scroll::-webkit-scrollbar-thumb { background: rgba(232,228,220,0.2); }
-  .brand-item {
-    padding: 1.3rem 0; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-  }
+  .brand-item { padding: 1.3rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .brand-name { font-size: 11px; letter-spacing: 3px; color: var(--white); text-transform: uppercase; font-weight: 200; }
   .brand-year { font-size: 10px; color: rgba(232,228,220,0.3); font-weight: 200; }
 
   .contact { padding: 7rem 3rem; border-top: 1px solid var(--border); text-align: center; }
   .contact-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 7vw, 96px); font-weight: 300; line-height: 1; margin-bottom: 2.5rem; }
   .contact-title em { font-style: italic; color: var(--accent); }
-  .contact-email { display: inline-block; font-size: 10px; letter-spacing: 4px; color: rgba(232,228,220,0.28); text-decoration: none; border-bottom: 1px solid rgba(232,228,220,0.07); padding-bottom: 4px; transition: all 0.3s ease; font-weight: 200; }
+  .contact-email { display: inline-block; font-size: 10px; letter-spacing: 4px; color: rgba(232,228,220,0.28); text-decoration: none; border-bottom: 1px solid rgba(232,228,220,0.07); padding-bottom: 4px; transition: all 0.3s ease; font-weight: 200; word-break: break-all; }
   .contact-email:hover { color: var(--white); border-color: var(--accent); letter-spacing: 6px; }
 
-  footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
   .footer-copy { font-size: 9px; color: rgba(232,228,220,0.1); letter-spacing: 2px; font-weight: 200; }
   .footer-logo { font-size: 9px; letter-spacing: 7px; color: rgba(232,228,220,0.1); font-weight: 200; }
 
@@ -149,6 +139,46 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ───── MOBILE ───── */
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-logo-text { font-size: 10px; letter-spacing: 5px; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 9px; letter-spacing: 2px; }
+
+    .hero { padding: 0 1.5rem 3rem; }
+    .hero-line { display: none; }
+    .hero-title { font-size: clamp(44px, 13vw, 80px); }
+    .hero-sub { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .hero-desc { max-width: 100%; }
+    .hero-scroll { display: none; }
+
+    .awards-bar { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem; }
+    .award-divider { display: none; }
+    .award-item { gap: 0.8rem; }
+    .award-name { font-size: 9px; }
+
+    .work { padding: 3rem 1.5rem; }
+    .work-grid { grid-template-columns: 1fr; }
+    .work-item, .work-item:first-child { aspect-ratio: 16/9; grid-column: span 1; }
+    /* On mobile, info always visible since no hover */
+    .work-info { opacity: 1; transform: translateY(0); }
+    .sound-icon { opacity: 1; }
+
+    .about { padding: 4rem 1.5rem; grid-template-columns: 1fr; gap: 3rem; }
+    .about-text { font-size: 14px; }
+    .brands-scroll { max-height: none; padding-right: 0; }
+
+    .contact { padding: 5rem 1.5rem; }
+    .contact-email { font-size: 11px; letter-spacing: 2px; }
+    .contact-email:hover { letter-spacing: 2px; }
+
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -271,22 +301,26 @@
 
 <script src="https://player.vimeo.com/api/player.js"></script>
 <script>
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-  function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!isMobile) {
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
   }
-  animRing();
 
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
@@ -306,12 +340,18 @@
   document.querySelectorAll('.work-click').forEach(el => {
     el.addEventListener('click', () => {
       const idx = parseInt(el.getAttribute('data-player'));
+      const item = el.closest('.work-item');
       if (currentlyPlaying === idx) {
         players[idx].setVolume(0);
+        item.classList.remove('sound-on');
         currentlyPlaying = -1;
       } else {
-        if (currentlyPlaying !== -1) players[currentlyPlaying].setVolume(0);
+        if (currentlyPlaying !== -1) {
+          players[currentlyPlaying].setVolume(0);
+          document.querySelectorAll('.work-item')[currentlyPlaying].classList.remove('sound-on');
+        }
         players[idx].setVolume(1);
+        item.classList.add('sound-on');
         currentlyPlaying = idx;
       }
     });
