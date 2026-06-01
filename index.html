@@ -25,15 +25,16 @@
   .nav-links a { color:rgba(22,22,22,0.4); text-decoration:none; font-size:10px; letter-spacing:3px; text-transform:uppercase; transition:color .3s ease; font-weight:300; }
   .nav-links a:hover { color:var(--ink); }
 
-  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 3rem 4rem; position:relative; }
-  .hero-line { position:absolute; top:0; bottom:0; right:38%; width:1px; background:var(--border); }
-  .hero-eyebrow { font-size:10px; letter-spacing:5px; color:var(--accent); text-transform:uppercase; margin-bottom:1.5rem; font-weight:300; opacity:0; animation:fadeUp 1s ease .3s forwards; }
-  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(56px,10.5vw,144px); font-weight:300; line-height:.92; letter-spacing:-1px; opacity:0; animation:fadeUp 1s ease .5s forwards; }
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 2rem; position:relative; }
+  .hero-eyebrow { font-size:10px; letter-spacing:6px; color:var(--accent); text-transform:uppercase; margin-bottom:1.8rem; font-weight:300; opacity:0; animation:fadeUp 1s ease .3s forwards; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(54px,9.5vw,136px); font-weight:300; line-height:.98; letter-spacing:-1px; opacity:0; animation:fadeUp 1s ease .5s forwards; }
   .hero-title em { font-style:italic; color:var(--accent); }
-  .hero-sub { margin-top:2.5rem; display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; opacity:0; animation:fadeUp 1s ease .8s forwards; }
-  .hero-desc { font-size:11px; color:rgba(22,22,22,0.45); letter-spacing:1px; line-height:2; max-width:280px; font-weight:300; }
-  .hero-scroll { font-size:9px; letter-spacing:4px; color:rgba(22,22,22,0.3); text-transform:uppercase; display:flex; align-items:center; gap:12px; font-weight:300; white-space:nowrap; }
-  .hero-scroll::before { content:''; width:40px; height:1px; background:rgba(22,22,22,0.2); }
+  .hero-desc { font-size:11px; color:rgba(22,22,22,0.45); letter-spacing:1px; line-height:2; max-width:380px; margin:2.4rem auto 0; font-weight:300; opacity:0; animation:fadeUp 1s ease .85s forwards; }
+  .scroll-cue { position:absolute; bottom:2.4rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:14px; background:none; border:none; padding:12px 18px; cursor:pointer; opacity:0; animation:cueIn 1s ease 1.2s forwards; }
+  .scroll-cue-text { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:rgba(22,22,22,0.45); font-weight:300; transition:color .3s ease; animation:blink 2s ease-in-out infinite; }
+  .scroll-cue-arrow { color:var(--ink); display:flex; animation:arrowBob 2s ease-in-out infinite; }
+  .scroll-cue-arrow svg { width:22px; height:22px; }
+  .scroll-cue:hover .scroll-cue-text { color:var(--ink); }
 
   .awards-bar { padding:1.4rem 3rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:3rem; }
   .award-item { display:flex; align-items:center; gap:1rem; flex-shrink:0; opacity:0; animation:fadeIn .8s ease forwards; }
@@ -46,26 +47,24 @@
   .work { padding:5rem 3rem; }
   .section-label { font-size:9px; letter-spacing:5px; color:rgba(22,22,22,0.4); text-transform:uppercase; margin-bottom:3rem; font-weight:300; }
   .work-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); }
-  .work-item { position:relative; aspect-ratio:16/9; background:#e9e9e9; overflow:hidden; cursor:none; }
+  .work-item { position:relative; aspect-ratio:16/9; background:#0a0a0a; overflow:hidden; cursor:none; }
   .work-item.featured { grid-column:span 2; aspect-ratio:21/9; }
-  .work-item .bg-video, .work-item .preview-frame { position:absolute; top:0; left:0; width:100%; height:100%; border:none; z-index:1; pointer-events:none; }
-  .work-item .preview-frame { opacity:0; transition:opacity .5s ease; background:#000; }
-  .work-thumb { position:absolute; inset:0; background-size:cover; background-position:center; background-color:#e9e9e9; z-index:1; transition:opacity .4s ease; }
+  .inline-player { position:absolute; inset:0; width:100%; height:100%; border:none; z-index:2; opacity:0; pointer-events:none; transition:opacity .4s ease; background:#000; }
+  .work-item.playing .inline-player { opacity:1; }
+  .work-thumb { position:absolute; inset:0; background-size:cover; background-position:center; background-color:#0a0a0a; z-index:1; transition:opacity .4s ease; }
   .work-thumb::after { content:''; position:absolute; inset:0; background:linear-gradient(transparent 45%, rgba(0,0,0,0.55)); }
-  .featured .work-thumb { display:none; }
-  .play-circle { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:56px; height:56px; border:1px solid rgba(255,255,255,0.85); border-radius:50%; z-index:2; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.22); transition:opacity .3s ease, transform .3s ease; }
+  .play-circle { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:56px; height:56px; border:1px solid rgba(255,255,255,0.85); border-radius:50%; z-index:4; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.22); transition:opacity .3s ease, transform .3s ease; }
   .play-circle svg { width:18px; height:18px; fill:#fff; margin-left:3px; }
-  .featured .play-circle { display:none; }
   .work-item:hover .play-circle { transform:translate(-50%,-50%) scale(1.08); }
-  .work-item.previewing .work-thumb, .work-item.previewing .play-circle { opacity:0; }
-  .work-item.previewing .preview-frame { opacity:1; }
-  .work-click { position:absolute; inset:0; z-index:3; cursor:none; }
-  .work-info { position:absolute; bottom:0; left:0; right:0; padding:1.5rem; background:linear-gradient(transparent,rgba(0,0,0,0.78)); transform:translateY(8px); opacity:0; transition:all .35s ease; z-index:2; pointer-events:none; }
-  .work-item:hover .work-info, .featured .work-info { opacity:1; transform:translateY(0); }
+  .work-click { position:absolute; inset:0; z-index:5; cursor:none; }
+  .work-item.playing .work-thumb, .work-item.playing .play-circle, .work-item.playing .work-info { opacity:0; pointer-events:none; }
+  .work-info { position:absolute; bottom:0; left:0; right:0; padding:1.5rem; background:linear-gradient(transparent,rgba(0,0,0,0.78)); transform:translateY(8px); opacity:0; transition:all .35s ease; z-index:3; pointer-events:none; }
+  .work-item:hover .work-info { opacity:1; transform:translateY(0); }
   .work-client { font-size:9px; letter-spacing:4px; color:#fff; text-transform:uppercase; margin-bottom:5px; font-weight:300; opacity:.8; }
   .work-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; font-style:italic; color:#fff; }
   .work-credit { font-size:8px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-top:8px; font-weight:300; }
-  .work-tag { position:absolute; top:1rem; left:1rem; z-index:2; font-size:8px; letter-spacing:2px; color:#fff; text-transform:uppercase; border:1px solid rgba(255,255,255,0.4); padding:3px 8px; font-weight:300; pointer-events:none; background:rgba(0,0,0,0.2); }
+  .work-tag { position:absolute; top:1rem; left:1rem; z-index:4; font-size:8px; letter-spacing:2px; color:#fff; text-transform:uppercase; border:1px solid rgba(255,255,255,0.4); padding:3px 8px; font-weight:300; pointer-events:none; background:rgba(0,0,0,0.2); }
+  .work-item.playing .work-tag { opacity:0; }
 
   .about { padding:7rem 3rem; border-top:1px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
   .about-text { font-size:13px; color:var(--ink); line-height:2.2; letter-spacing:.3px; font-weight:300; }
@@ -95,6 +94,9 @@
 
   @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
   @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  @keyframes cueIn { from{opacity:0;transform:translateX(-50%) translateY(10px);} to{opacity:1;transform:translateX(-50%) translateY(0);} }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+  @keyframes arrowBob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
   .reveal { opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
 
@@ -105,20 +107,15 @@
     .nav-logo img { height:19px; }
     .nav-links { gap:1.2rem; }
     .nav-links a { font-size:9px; letter-spacing:2px; }
-    .hero { padding:0 1.5rem 3rem; }
-    .hero-line { display:none; }
-    .hero-title { font-size:clamp(44px,13vw,80px); }
-    .hero-sub { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+    .hero { padding:0 1.5rem; }
+    .hero-title { font-size:clamp(42px,12vw,76px); }
     .hero-desc { max-width:100%; }
-    .hero-scroll { display:none; }
+    .scroll-cue { bottom:1.8rem; }
     .awards-bar { flex-direction:column; align-items:flex-start; gap:1rem; padding:1.5rem; }
     .award-divider { display:none; }
     .work { padding:3rem 1.5rem; }
     .work-grid { grid-template-columns:1fr; }
     .work-item, .work-item.featured { aspect-ratio:16/9; grid-column:span 1; cursor:pointer; }
-    .work-item .bg-video, .work-item .preview-frame { display:none !important; }
-    .featured .work-thumb { display:block; }
-    .featured .play-circle { display:flex; }
     .work-info { opacity:1; transform:translateY(0); }
     .about { padding:4rem 1.5rem; grid-template-columns:1fr; gap:3rem; }
     .about-text { font-size:14px; }
@@ -145,13 +142,13 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-line"></div>
   <p class="hero-eyebrow">Composer · Los Angeles</p>
-  <h1 class="hero-title">Original music<br>for <em>film</em> &<br>commercials.</h1>
-  <div class="hero-sub">
-    <p class="hero-desc">Compositions built for the world's most ambitious brands and campaigns.</p>
-    <span class="hero-scroll">Scroll to explore</span>
-  </div>
+  <h1 class="hero-title">Original music<br>for <em>film</em> &amp; <em>commercials</em>.</h1>
+  <p class="hero-desc">Compositions built for the world's most ambitious brands and campaigns.</p>
+  <button class="scroll-cue" id="scrollCue" aria-label="Scroll to explore">
+    <span class="scroll-cue-text">Scroll to explore</span>
+    <span class="scroll-cue-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </button>
 </section>
 
 <div class="awards-bar">
@@ -164,7 +161,6 @@
   <p class="section-label reveal">Selected Work</p>
   <div class="work-grid">
     <div class="work-item featured reveal" data-vimeo="1056623422" data-hash="">
-      <iframe class="bg-video" src="https://player.vimeo.com/video/1056623422?background=1&loop=1&muted=1" allow="autoplay; fullscreen"></iframe>
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -173,7 +169,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1182705407" data-hash="3c4d89c5d8">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -182,7 +177,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1182707456" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -191,7 +185,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1182702728" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -200,7 +193,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1167836889" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -209,7 +201,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1130091614" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -218,7 +209,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1166066811" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -227,7 +217,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1124076233" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -236,7 +225,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1124075430" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -245,7 +233,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1124074795" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -254,7 +241,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1091484831" data-hash="fcafbeaf85">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -263,7 +249,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1067969677" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -272,7 +257,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1016712154" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -281,7 +265,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1049846328" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -290,7 +273,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1007691346" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -299,7 +281,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1007461869" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -308,7 +289,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1007687648" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -317,7 +297,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1007692870" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -326,7 +305,6 @@
     </div>
 
     <div class="work-item reveal" data-vimeo="1007698525" data-hash="">
-      
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
@@ -377,13 +355,6 @@
   <span class="footer-logo">MISSION</span>
 </footer>
 
-<div class="video-modal" id="videoModal">
-  <div class="video-modal-inner">
-    <button class="video-close" id="videoClose">×</button>
-    <div class="vid-wrap"><iframe id="modalIframe" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
-  </div>
-</div>
-
 <script src="https://player.vimeo.com/api/player.js"></script>
 <script>
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -416,52 +387,61 @@
   });
 
   // Featured background autoplay (desktop)
-  if (!isMobile) {
-    const feat = document.querySelector('.work-item.featured .bg-video');
-    if (feat) { const p = new Vimeo.Player(feat); p.setVolume(0); }
+  // Inline players: click to play in place (with sound); only one plays at a time; players persist (no reload)
+  const items = Array.from(document.querySelectorAll('.work-item'));
+  const players = new Array(items.length).fill(null);
+  let active = -1;
 
-    // Hover preview on non-featured items
-    document.querySelectorAll('.work-item:not(.featured)').forEach(item => {
-      const id = item.getAttribute('data-vimeo'), hash = item.getAttribute('data-hash');
-      let frame = null, player = null;
-      item.addEventListener('mouseenter', () => {
-        if (frame) return;
-        frame = document.createElement('iframe');
-        frame.className = 'preview-frame';
-        frame.allow = 'autoplay; fullscreen';
-        frame.src = 'https://player.vimeo.com/video/' + id + '?' + (hash ? 'h='+hash+'&' : '') + 'background=1&loop=1&muted=1&autoplay=1';
-        item.insertBefore(frame, item.firstChild);
-        player = new Vimeo.Player(frame);
-        player.on('play', () => item.classList.add('previewing'));
-      });
-      item.addEventListener('mouseleave', () => {
-        item.classList.remove('previewing');
-        const f = frame, p = player; frame = null; player = null;
-        if (p) { try { p.unload(); } catch(e){} }
-        if (f) setTimeout(()=> f.remove(), 400);
-      });
+  function ensurePlayer(i) {
+    if (players[i]) return players[i];
+    const item = items[i];
+    const id = item.getAttribute('data-vimeo'), hash = item.getAttribute('data-hash');
+    const iframe = document.createElement('iframe');
+    iframe.className = 'inline-player';
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+    iframe.src = 'https://player.vimeo.com/video/' + id + '?' + (hash ? 'h=' + hash + '&' : '') +
+                 'controls=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1';
+    item.insertBefore(iframe, item.firstChild);
+    const p = new Vimeo.Player(iframe);
+    p.on('play', () => { items[i].classList.add('playing'); });
+    p.on('pause', () => { items[i].classList.remove('playing'); });
+    p.on('ended', () => { items[i].classList.remove('playing'); });
+    players[i] = p;
+    return p;
+  }
+
+  function pauseOthers(i) {
+    players.forEach((p, j) => {
+      if (p && j !== i) { p.pause().catch(()=>{}); p.setVolume(0).catch(()=>{}); items[j].classList.remove('playing'); }
     });
   }
 
-  // Click any video -> fullscreen modal with sound
-  const modal = document.getElementById('videoModal');
-  const modalIframe = document.getElementById('modalIframe');
-  const closeBtn = document.getElementById('videoClose');
-  document.querySelectorAll('.work-click').forEach(el => {
-    el.addEventListener('click', () => {
-      const item = el.closest('.work-item');
-      const id = item.getAttribute('data-vimeo'), hash = item.getAttribute('data-hash');
-      let src = 'https://player.vimeo.com/video/' + id + '?';
-      if (hash) src += 'h=' + hash + '&';
-      src += 'autoplay=1&playsinline=1';
-      modalIframe.src = src;
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+  items.forEach((item, i) => {
+    const click = item.querySelector('.work-click');
+    click.addEventListener('click', () => {
+      // Toggle play/pause if this one is already the active player
+      if (active === i && players[i]) {
+        players[i].getPaused().then(paused => {
+          if (paused) { players[i].setVolume(1).catch(()=>{}); players[i].play().catch(()=>{}); }
+          else { players[i].pause().catch(()=>{}); }
+        });
+        return;
+      }
+      pauseOthers(i);
+      const p = ensurePlayer(i);
+      item.classList.add('playing');
+      p.setVolume(1).catch(()=>{});
+      p.play().catch(()=>{});
+      active = i;
     });
   });
-  function closeModal(){ modal.classList.remove('active'); document.body.style.overflow=''; modalIframe.src=''; }
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+  // Scroll cue -> smooth scroll to work section
+  const cue = document.getElementById('scrollCue');
+  if (cue) cue.addEventListener('click', () => {
+    const target = document.getElementById('work');
+    if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
 </script>
 </body>
 </html>
