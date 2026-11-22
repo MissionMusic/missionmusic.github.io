@@ -869,8 +869,8 @@
   '  float dl=abs(fract(k)-.5);',
   '  float line=1.-smoothstep(0.,max(fw*.9,.012)*uLineW,dl);',
   '  float strong=step(mod(floor(k),4.),.5);',
-  '  float lines=line*(.10+.11*strong);',
-  '  float fog=smoothstep(.30,.80,f)*.07+(1.-smoothstep(.15,.55,r.x))*.035;',
+  '  float lines=line*(.06+.065*strong);',
+  '  float fog=smoothstep(.30,.80,f)*.045+(1.-smoothstep(.15,.55,r.x))*.02;',
   '  float edgeM=smoothstep(1.,.93,uv.y);',
   '  float edge=mix(1.,edgeM,uEdge);',
   '  vec2 cc=(uv-.5)*vec2(uRes.x/uRes.y,1.);',
@@ -880,11 +880,11 @@
   '  vec3 col=mix(vec3(1.),vec3(.086),inten);',
   /* discreet rainbow: tiny ambient, blooms around the cursor and only while it moves */
   '  float glow=exp(-dd*9.)*uMouseOn;',
-  '  float s=.03+.2*glow*(.2+.8*uMove);',
+  '  float s=.02+.12*glow*(.2+.8*uMove);',
   '  vec3 rb=.5+.5*cos(6.28318*(vec3(0.,.33,.67)+f*1.6+t*2.+sqrt(dd)*.8));',
-  '  float amt=clamp(s*(lines*3.*center+fog*5.)*edge*uGain,0.,.22);',
+  '  float amt=clamp(s*(lines*3.*center+fog*5.)*edge*uGain,0.,.15);',
   '  col=mix(col,rb,amt);',
-  '  col+=(hash(frag+fract(uTime*.7)*173.)-.5)*.028*edge;',
+  '  col+=(hash(frag+fract(uTime*.7)*173.)-.5)*.02*edge;',
   '  gl_FragColor=vec4(col,1.);',
   '}'].join('\n');
 
